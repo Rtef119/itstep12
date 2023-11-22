@@ -14,4 +14,10 @@ if response.status_code==200:
         title=elem.text
         print(title)
 
-        connect = sqlite3.connect("databasefinal.sl3")
+        connect = sqlite3.connect('databasefinal.sl3')
+        cur = connect.cursor()
+        #cur.execute("CREATE TABLE tb1 (name TEXT);")
+        cur.execute("INSERT INTO tb1 (name) VALUES (?)", (title,))
+
+        connect.commit()
+        connect.close()
