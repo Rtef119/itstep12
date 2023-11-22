@@ -1,17 +1,10 @@
+import sqlite3
+
 from bs4 import BeautifulSoup
 import requests
 import sqlite3 as sq
 
 url = ("https://www.bbc.com/ukrainian/features-66330880")
-
-
-cn = sq.connect("databasefinal.sl3")
-cur = cn.cursor()
-
-cur = sq.connect("databasefinal.sl3")
-
-cn.commit()
-cn.close()
 
 response = requests.get(url)
 if response.status_code==200:
@@ -19,5 +12,6 @@ if response.status_code==200:
     list = bs.find_all('h2')
     for elem in list[:10]:
         title=elem.text
-        print()
-        cur.execute("INSERT INTO first_table (name) VALUES ('title');")
+        print(title)
+
+        connect = sqlite3.connect("databasefinal.sl3")
